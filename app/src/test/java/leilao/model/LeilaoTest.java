@@ -140,5 +140,15 @@ public class LeilaoTest {
         assertEquals(1, quantidadeLancesDevolvida);
     }
 
+    @Test
+    public void naoDeve_AdicionarLance_QuandoForDoMesmoUsuarioEmSequencia(){
+        CONSOLE.propoe(new Lance(ALEX, 500.0));
+        CONSOLE.propoe(new Lance(ALEX, 600.0));
+
+        int i = CONSOLE.quantidadeLances();
+
+        assertEquals(1, i);
+    }
+
 
 }

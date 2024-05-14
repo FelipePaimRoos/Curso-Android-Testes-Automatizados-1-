@@ -2,50 +2,78 @@ package leilao.model;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class LeilaoTest {
 
+    private Leilao console = new Leilao("Console");
+
+    private Usuario alex = new Usuario("Alex");
+    private Usuario fran = new Usuario("Fran");
+
     @Test
-    public void propoe() {
+    public void getDescricaoQuandoRecebeDescricaoDevolveDescricao(){
+        String descricaoDevolvida = console.getDescricao();
 
-
+        assertEquals("Console", descricaoDevolvida);
     }
 
     @Test
-    public void getMaiorLance() {
-        Leilao teste= new Leilao("");
-        Usuario user = new Usuario("teste");
-        Lance lanceMenor = new Lance(user, 100);
-        Usuario user2 = new Usuario("teste2");
-        Lance lanceMaior = new Lance(user2, 200);
+    public void getMaiorLanceQuandoRecebeApenasUmLanceDevolveMaiorLance(){
+        console.propoe(new Lance(alex, 200));
 
-        teste.propoe(lanceMaior);
-        teste.propoe(lanceMenor);
+        double maiorLanceDevolvidoDoConsole = console.getMaiorLance();
 
-        assertEquals(teste.getMaiorLance(), lanceMaior.getValor());
+        assertEquals(200, maiorLanceDevolvidoDoConsole, 0.0001);
+    }
+    @Test
+    public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescenteDevolveMaiorLance(){
+        console.propoe(new Lance(alex, 100.0));
+        console.propoe(new Lance(fran, 200.0));
+
+        double maiorLanceDevolvidoDoComputador = console.getMaiorLance();
+
+        assertEquals(200.0, maiorLanceDevolvidoDoComputador, 0.0001);
     }
 
     @Test
-    public void getDescricao() {
-        Leilao teste = new Leilao("descrição");
-        assertEquals("descrição", teste.getDescricao());
+    public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescenteDevolveMaiorLance(){
+        console.propoe(new Lance(alex, 10000.0));
+        console.propoe(new Lance(fran, 9000.0));
 
+        double maiorLanceDevolvidoDoConsole = console.getMaiorLance();
+
+        assertEquals(10000.0, maiorLanceDevolvidoDoConsole, 0.0001);
     }
 
     @Test
-    public void getMenorLance() {
-        Leilao teste= new Leilao("");
-        Usuario user = new Usuario("teste");
-        Lance lanceMenor = new Lance(user, 100);
-        Usuario user2 = new Usuario("teste2");
-        Lance lanceMaior = new Lance(user2, 200);
+    public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescente(){
+        console.propoe(new Lance(alex, 100.0));
+        console.propoe(new Lance(fran, 200.0));
 
-        teste.propoe(lanceMaior);
-        teste.propoe(lanceMenor);
+        double menorLanceDevolvidoDoConsole = console.getMenorLance();
 
-        assertEquals(teste.getMenorLance(), lanceMenor.getValor());
+        assertEquals(100.0, menorLanceDevolvidoDoConsole, 0.0001);
     }
 
+    @Test
+    public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescente(){
+        console.propoe(new Lance(alex, 200.0));
+        console.propoe(new Lance(fran, 100.0));
+
+        double menorLanceDevolvidoDoConsole = console.getMenorLance();
+
+        assertEquals(100.0, menorLanceDevolvidoDoConsole, 0.0001);
+    }
+
+    @Test
+    public void getDevolverMenorLanceQuandoRecebeUmLance(){
+        console.propoe(new Lance(alex, 100.0));
+
+        double menorLanceDevolvidoDoConsole = console.getMenorLance();
+
+        assertEquals(100.0, menorLanceDevolvidoDoConsole, 0.0001);
+    }
 
 }

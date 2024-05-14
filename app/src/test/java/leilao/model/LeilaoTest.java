@@ -7,10 +7,9 @@ import org.junit.Test;
 
 public class LeilaoTest {
 
-    private Leilao console = new Leilao("Console");
+    private final Leilao console = new Leilao("Console");
+    private final Usuario alex = new Usuario("Alex");
 
-    private Usuario alex = new Usuario("Alex");
-    private Usuario fran = new Usuario("Fran");
 
     @Test
     public void getDescricaoQuandoRecebeDescricaoDevolveDescricao(){
@@ -30,7 +29,7 @@ public class LeilaoTest {
     @Test
     public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescenteDevolveMaiorLance(){
         console.propoe(new Lance(alex, 100.0));
-        console.propoe(new Lance(fran, 200.0));
+        console.propoe(new Lance(new Usuario("fran"), 200.0));
 
         double maiorLanceDevolvidoDoComputador = console.getMaiorLance();
 
@@ -40,7 +39,7 @@ public class LeilaoTest {
     @Test
     public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescenteDevolveMaiorLance(){
         console.propoe(new Lance(alex, 10000.0));
-        console.propoe(new Lance(fran, 9000.0));
+        console.propoe(new Lance(new Usuario("fran"), 9000.0));
 
         double maiorLanceDevolvidoDoConsole = console.getMaiorLance();
 
@@ -50,7 +49,7 @@ public class LeilaoTest {
     @Test
     public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescente(){
         console.propoe(new Lance(alex, 100.0));
-        console.propoe(new Lance(fran, 200.0));
+        console.propoe(new Lance(new Usuario("fran"), 200.0));
 
         double menorLanceDevolvidoDoConsole = console.getMenorLance();
 
@@ -60,7 +59,7 @@ public class LeilaoTest {
     @Test
     public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescente(){
         console.propoe(new Lance(alex, 200.0));
-        console.propoe(new Lance(fran, 100.0));
+        console.propoe(new Lance(new Usuario("fran"), 100.0));
 
         double menorLanceDevolvidoDoConsole = console.getMenorLance();
 

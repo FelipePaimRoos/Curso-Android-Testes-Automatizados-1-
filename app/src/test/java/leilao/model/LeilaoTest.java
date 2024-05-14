@@ -39,16 +39,6 @@ public class LeilaoTest {
     }
 
     @Test
-    public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescenteDevolveMaiorLance(){
-        CONSOLE.propoe(new Lance(ALEX, 10000.0));
-        CONSOLE.propoe(new Lance(new Usuario("fran"), 9000.0));
-
-        double maiorLanceDevolvidoDoConsole = CONSOLE.getMaiorLance();
-
-        assertEquals(10000.0, maiorLanceDevolvidoDoConsole, DELTA);
-    }
-
-    @Test
     public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescente(){
         CONSOLE.propoe(new Lance(ALEX, 100.0));
         CONSOLE.propoe(new Lance(new Usuario("fran"), 200.0));
@@ -58,15 +48,6 @@ public class LeilaoTest {
         assertEquals(100.0, menorLanceDevolvidoDoConsole, DELTA);
     }
 
-    @Test
-    public void getDevolverMenorLanceQuandoRecebeMaisDeUmLanceEmOrdemDecrescente(){
-        CONSOLE.propoe(new Lance(ALEX, 200.0));
-        CONSOLE.propoe(new Lance(new Usuario("fran"), 100.0));
-
-        double menorLanceDevolvidoDoConsole = CONSOLE.getMenorLance();
-
-        assertEquals(100.0, menorLanceDevolvidoDoConsole, DELTA);
-    }
 
     @Test
     public void getDevolverMenorLanceQuandoRecebeUmLance(){
@@ -110,8 +91,8 @@ public class LeilaoTest {
 
     @Test
     public void deve_devolverTresMaioresLances_QuandoRecebeDoisLances(){
-        CONSOLE.propoe(new Lance(new Usuario("fran"), 300));
-        CONSOLE.propoe(new Lance(ALEX, 200));
+        CONSOLE.propoe(new Lance(new Usuario("fran"), 200));
+        CONSOLE.propoe(new Lance(ALEX, 300));
         List<Lance> tresMaioresLancesDevolvidos = CONSOLE.tresMaioresLances();
 
         assertEquals(2, tresMaioresLancesDevolvidos.size());
@@ -147,6 +128,16 @@ public class LeilaoTest {
         double menorLanceDevolvido = CONSOLE.getMenorLance();
 
         assertEquals(0.0, menorLanceDevolvido, DELTA);
+    }
+
+    @Test
+    public void naoDeve_AdicionarLance_QuandoForMenorQueOMaiorLance(){
+        CONSOLE.propoe(new Lance(ALEX, 500));
+        CONSOLE.propoe(new Lance(new Usuario("Fran"), 400));
+
+        int quantidadeLancesDevolvida = CONSOLE.quantidadeLances();
+
+        assertEquals(1, quantidadeLancesDevolvida);
     }
 
 

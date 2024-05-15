@@ -168,11 +168,13 @@ public class LeilaoTest {
         CONSOLE.propoe(new Lance(fran, 800.0));
         CONSOLE.propoe(new Lance(ALEX, 900.0));
         CONSOLE.propoe(new Lance(fran, 1000.0));
-        CONSOLE.propoe(new Lance(ALEX, 1100.0));
 
-        int i = CONSOLE.quantidadeLances();
-
-        assertEquals(10, i);
+        try{
+            CONSOLE.propoe(new Lance(ALEX, 1100.0));
+            fail("Era esperada uma Runtime Exception");
+        }catch (RuntimeException e){
+            assertEquals("Usuario ja deu mais de 5 lances", e.getMessage());
+        }
     }
 
 

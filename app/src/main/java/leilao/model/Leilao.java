@@ -44,7 +44,7 @@ public class Leilao implements Serializable {
         if(!lances.isEmpty()){
             Usuario usuarioNovo = lance.getUsuario();
             if (validaUsuarioIgualDoUltimoLance(usuarioNovo)) throw new RuntimeException("Mesmo usuário do ultimo lance");
-            if (validaUsuarioMaisDe5Lances(usuarioNovo)) return true;
+            if (validaUsuarioMaisDe5Lances(usuarioNovo)) throw new RuntimeException("Usuario ja deu mais de 5 lances");
         }
         return false;
     }

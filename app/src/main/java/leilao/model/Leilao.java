@@ -40,10 +40,10 @@ public class Leilao implements Serializable {
 
     private boolean validaLance(Lance lance) {
         double valorLance = lance.getValor();
-        if (validaLanceExiste(valorLance)) throw new RuntimeException();
+        if (validaLanceExiste(valorLance)) throw new RuntimeException("Lance foi menor que o maior lance");
         if(!lances.isEmpty()){
             Usuario usuarioNovo = lance.getUsuario();
-            if (validaUsuarioIgualDoUltimoLance(usuarioNovo)) return true;
+            if (validaUsuarioIgualDoUltimoLance(usuarioNovo)) throw new RuntimeException("Mesmo usuário do ultimo lance");
             if (validaUsuarioMaisDe5Lances(usuarioNovo)) return true;
         }
         return false;

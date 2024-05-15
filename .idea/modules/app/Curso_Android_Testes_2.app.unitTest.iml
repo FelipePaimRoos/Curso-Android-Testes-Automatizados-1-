@@ -45,6 +45,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.constraint:constraint-layout-solver:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-all:1.3" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="Curso_Android_Testes_2.app.main" />
 </module>

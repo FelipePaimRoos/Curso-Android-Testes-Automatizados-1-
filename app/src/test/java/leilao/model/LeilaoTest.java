@@ -1,7 +1,15 @@
 package leilao.model;
 
+import static org.hamcrest.CoreMatchers.both;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -26,7 +34,8 @@ public class LeilaoTest {
     public void getDescricaoQuandoRecebeDescricaoDevolveDescricao(){
         String descricaoDevolvida = CONSOLE.getDescricao();
 
-        assertEquals("Console", descricaoDevolvida);
+       // assertEquals("Console", descricaoDevolvida);
+        assertThat(descricaoDevolvida, is(equalTo("Console")));
     }
 
     @Test
@@ -35,7 +44,8 @@ public class LeilaoTest {
 
         double maiorLanceDevolvidoDoConsole = CONSOLE.getMaiorLance();
 
-        assertEquals(200, maiorLanceDevolvidoDoConsole, DELTA);
+       // assertEquals(200, maiorLanceDevolvidoDoConsole, DELTA);
+            assertThat(maiorLanceDevolvidoDoConsole, closeTo(200.0, DELTA));
     }
     @Test
     public void getMaiorLanceQuandoRecebeMaisDeUmLanceEmOrdemCrescenteDevolveMaiorLance(){
@@ -75,10 +85,18 @@ public class LeilaoTest {
 
         List<Lance> tresMaioresLancesDevolvidos = CONSOLE.tresMaioresLances();
 
-        assertEquals(3, tresMaioresLancesDevolvidos.size());
-        assertEquals(400.0, tresMaioresLancesDevolvidos.get(0).getValor(), DELTA);
-        assertEquals(300.0, tresMaioresLancesDevolvidos.get(1).getValor(), DELTA);
-        assertEquals(200.0, tresMaioresLancesDevolvidos.get(2).getValor(), DELTA);
+        //assertEquals(3, tresMaioresLancesDevolvidos.size());
+        //assertThat(tresMaioresLancesDevolvidos, hasSize(equalTo(3)));
+
+        //assertEquals(400.0, tresMaioresLancesDevolvidos.get(0).getValor(), DELTA);
+        //assertThat(tresMaioresLancesDevolvidos, hasItem(new Lance(new Usuario("felipe"), 400)));
+        //assertEquals(300.0, tresMaioresLancesDevolvidos.get(1).getValor(), DELTA);
+        //assertEquals(200.0, tresMaioresLancesDevolvidos.get(2).getValor(), DELTA);
+
+        assertThat(tresMaioresLancesDevolvidos, both(Matchers.<Lance>hasSize(3)).and(contains(
+                new Lance(new Usuario("felipe"), 400),
+                new Lance(new Usuario("fran"), 300),
+                new Lance(ALEX, 200))));
     }
 
     @Test
